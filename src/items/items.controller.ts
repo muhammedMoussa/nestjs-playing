@@ -12,7 +12,7 @@ export class ItemsController {
     }
 
     @Get(':id')
-    async getItemById(@Param('id') id): Promise<Item> {
+    getItemById(@Param('id') id): Promise<Item> {
         return this.itemService.getItemById(id)
     }
 
@@ -30,5 +30,5 @@ export class ItemsController {
     deletItem(@Param('id') id): Promise<Item> {
         return this.itemService.deleteItem(id)
     }
-
 }
+
