@@ -2,5 +2,5 @@ export interface Item {
     id?: string
     name: string
     description: string
-    qyt: number
+    qty: number
 }
