@@ -1,16 +1,19 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { CreateItemDto } from './dto/create-item.dto';
+import { ItemsService } from './items.service';
+import { Item } from './interfaces/item.iterface';
 
 @Controller('items')
 export class ItemsController {
+    constructor(private readonly itemService: ItemsService) {}
     @Get()
-    findAll(): string {
-        return 'Get All Items'
+    getAllItems(): Item[] {
+        return this.itemService.getAllItems()
     }
 
     @Get(':id')
-    findItemById(@Param('id') id): string {
-        return `Item: ${id}`
+    findItemById(@Param('id') id): Item {
+        return this.itemService.getItemById(id)
     }
 
     @Post()
