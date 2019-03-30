@@ -1,9 +1,14 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common'
+import { ApiResponse, ApiBearerAuth, ApiUseTags } from '@nestjs/swagger'
+
 import { CreateItemDto } from './dto/create-item.dto'
 import { ItemsService } from './items.service'
 import { Item } from './interfaces/item.iterface'
 
+@ApiUseTags('items')
+@ApiBearerAuth()
 @Controller('items')
+
 export class ItemsController {
     constructor(private readonly itemService: ItemsService) {}
     @Get()
@@ -17,6 +22,8 @@ export class ItemsController {
     }
 
     @Post()
+    @ApiResponse({ status: 201, description: 'The item has been successfully created.'})
+
     createItem(@Body() createItemDto: CreateItemDto): Promise<Item> {
         return this.itemService.createItem(createItemDto)
     }
